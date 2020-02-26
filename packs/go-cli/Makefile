@@ -8,7 +8,7 @@ MAIN_SRC_FILE=cmd/main.go
 GO := GO111MODULE=on go
 GO_NOMOD :=GO111MODULE=off go
 REV := $(shell git rev-parse --short HEAD 2> /dev/null || echo 'unknown')
-ORG := jenkins-x-labs
+ORG := REPLACE_ME_ORG
 ORG_REPO := $(ORG)/$(NAME)
 RELEASE_ORG_REPO := $(ORG_REPO)
 ROOT_PACKAGE := github.com/$(ORG_REPO)
@@ -22,12 +22,6 @@ CGO_ENABLED = 0
 REPORTS_DIR=$(BUILD_TARGET)/reports
 
 GOTEST := $(GO) test
-# If available, use gotestsum which provides more comprehensive output
-# This is used in the CI builds
-ifneq (, $(shell which gotestsum 2> /dev/null))
-GOTESTSUM_FORMAT ?= standard-quiet
-GOTEST := GO111MODULE=on gotestsum --junitfile $(REPORTS_DIR)/integration.junit.xml --format $(GOTESTSUM_FORMAT) --
-endif
 
 # set dev version unless VERSION is explicitly set via environment
 VERSION ?= $(shell echo "$$(git for-each-ref refs/tags/ --count=1 --sort=-version:refname --format='%(refname:short)' 2>/dev/null)-dev+$(REV)" | sed 's/^v//')
@@ -76,7 +70,6 @@ list: ## List all make targets
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-all: build ## Build the binary
 full: check ## Build and run the tests
 check: build test ## Build and run the tests
 get-test-deps: ## Install test dependencies
@@ -132,12 +125,40 @@ darwin: ## Build for OSX
 	chmod +x build/darwin/$(NAME)
 
 .PHONY: release
-release: clean build test linux win darwin # Release the binary
-	git fetch origin refs/tags/v$(VERSION)
-	jx-labs step changelog --verbose --header-file=hack/changelog-header.md --version=$(VERSION) --rev=$(PULL_BASE_SHA) --output-markdown=changelog.md --update-release=false; \
-	GITHUB_TOKEN=$(GITHUB_ACCESS_TOKEN) REV=$(REV) BRANCH=$(BRANCH) BUILDDATE=$(BUILD_DATE) GOVERSION=$(GO_VERSION) ROOTPACKAGE=$(ROOT_PACKAGE) VERSION=$(VERSION) goreleaser release --config=.goreleaser.yml --rm-dist --release-notes=./changelog.md --skip-validate; \
+release: clean build test linux win darwin
+	#git fetch origin refs/tags/v$(VERSION)
+	jx step changelog --verbose --header-file=hack/changelog-header.md --version=$(VERSION) --rev=$(PULL_BASE_SHA) --output-markdown=changelog.md --update-release=false
+	jxl goreleaser --organisation=$(ORG) --revision=$(REV) --branch=$(BRANCH) --build-date=$(BUILD_DATE) --go-version=$(GO_VERSION) --root-package=$(ROOT_PACKAGE) --version=$(VERSION)
 
 
 .PHONY: clean
 clean: ## Clean the generated artifacts
 	rm -rf build release dist
+
+
+get-fmt-deps: ## Install test dependencies
+	$(GO_NOMOD) get golang.org/x/tools/cmd/goimports
+
+.PHONY: fmt
+fmt: importfmt ## Format the code
+	$(eval FORMATTED = $(shell $(GO) fmt ./...))
+	@if [ "$(FORMATTED)" == "" ]; \
+      	then \
+      	    echo "All Go files properly formatted"; \
+      	else \
+      		echo "Fixed formatting for: $(FORMATTED)"; \
+      	fi
+
+.PHONY: importfmt
+importfmt: get-fmt-deps
+	@echo "Formatting the imports..."
+	goimports -w $(GO_DEPENDENCIES)
+
+.PHONY: lint
+lint: ## Lint the code
+	./hack/gofmt.sh
+	./hack/linter.sh
+	./hack/generate.sh
+
+.PHONY: all
+all: fmt build lint test
