@@ -70,16 +70,6 @@ pipelines:
           name: helmfile-apps
         - args:
           - step
-          - verify
-          - ready
-          - --pod-wait-time
-          - 30m
-          - -- exclude-build
-          command: jx
-          dir: /workspace/source
-          name: verify-pods-ready
-        - args:
-          - step
           - git
           - credentials
           - -o
