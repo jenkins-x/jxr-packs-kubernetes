@@ -16,6 +16,8 @@ pipelines:
             env:
             - name: HELM_PLUGINS
               value: "/root/.cache/helm/plugins"
+            - name: XDG_CONFIG_HOME
+              value: "/builder/home"
         steps:
         - args:
           - step
