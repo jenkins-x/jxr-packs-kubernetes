@@ -28,14 +28,6 @@ pipelines:
           command: jx
           dir: /workspace/source
           name: validate-git
-        - name: init-secrets
-          command: jxl
-          args:
-          - boot
-          - secrets
-          - export
-          - -f
-          - /tmp/jx-secrets.yaml
         - args:
           - step
           - verify
@@ -133,14 +125,6 @@ pipelines:
             - name: JX_SECRETS_YAML
               value: "/tmp/jx-secrets.yaml"
         steps:
-        - name: init-secrets
-          command: jxl
-          args:
-          - boot
-          - secrets
-          - export
-          - -f
-          - /tmp/jx-secrets.yaml
         - args:
           - step
           - create
