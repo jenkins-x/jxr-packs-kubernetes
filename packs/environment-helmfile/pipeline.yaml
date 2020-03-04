@@ -30,8 +30,7 @@ pipelines:
           name: validate-git
         - name: init-secrets
           image: gcr.io/jenkinsxio-labs/jxl:0.0.47
-          command:
-          - /bin/sh
+          command: /bin/sh
           args:
           - -c
           - "jxl boot secrets export -f $JX_SECRETS_YAML"
@@ -134,8 +133,7 @@ pipelines:
         steps:
         - name: init-secrets
           image: gcr.io/jenkinsxio-labs/jxl:0.0.47
-          command:
-          - /bin/sh
+          command: /bin/sh
           args:
           - -c
           - "jxl boot secrets export -f $JX_SECRETS_YAML"
