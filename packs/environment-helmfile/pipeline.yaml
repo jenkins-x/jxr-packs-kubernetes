@@ -3,12 +3,12 @@ extends:
   file: pipeline.yaml
 agent:
   label: jenkins-go
-  container: jenkinsxio/jenkins-x-installer:0.0.27
+  container: gcr.io/jenkinsxio-labs/jxl:0.0.45
 pipelines:
   release:
     pipeline:
       agent:
-        image: jenkinsxio/jenkins-x-installer:0.0.27
+        image: gcr.io/jenkinsxio-labs/jxl:0.0.45
       stages:
       - name: release
         options:
@@ -44,8 +44,6 @@ pipelines:
           - step
           - create
           - helmfile
-          - --values
-          - ../jx-requirements.values.yaml.gotmpl
           command: jx
           dir: /workspace/source
           name: generate-helmfile
@@ -114,7 +112,7 @@ pipelines:
   pullRequest:
     pipeline:
       agent:
-        image: jenkinsxio/jenkins-x-installer:0.0.27
+        image: gcr.io/jenkinsxio-labs/jxl:0.0.45
       stages:
       - name: pr-checks
         options:
@@ -127,8 +125,6 @@ pipelines:
           - step
           - create
           - helmfile
-          - --values
-          - ../jx-requirements.values.yaml.gotmpl
           command: jx
           dir: /workspace/source
           name: create-helmfile
