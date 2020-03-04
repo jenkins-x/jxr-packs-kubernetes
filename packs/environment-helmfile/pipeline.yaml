@@ -29,11 +29,13 @@ pipelines:
           dir: /workspace/source
           name: validate-git
         - name: init-secrets
-          image: gcr.io/jenkinsxio-labs/jxl:0.0.47
-          command: /bin/sh
+          command: jxl
           args:
-          - -c
-          - "jxl boot secrets export -f $JX_SECRETS_YAML"
+          - boot
+          - secrets
+          - export
+          - -f
+          - /tmp/jx-secrets.yaml
         - args:
           - step
           - verify
@@ -132,11 +134,13 @@ pipelines:
               value: "/tmp/jx-secrets.yaml"
         steps:
         - name: init-secrets
-          image: gcr.io/jenkinsxio-labs/jxl:0.0.47
-          command: /bin/sh
+          command: jxl
           args:
-          - -c
-          - "jxl boot secrets export -f $JX_SECRETS_YAML"
+          - boot
+          - secrets
+          - export
+          - -f
+          - /tmp/jx-secrets.yaml
         - args:
           - step
           - create
