@@ -5,6 +5,8 @@ pipelines:
   pullRequest:
     build:
       steps:
+      - name: make-test
+        command: make test
       - sh: export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml
         name: container-build
     postBuild:
