@@ -68,6 +68,7 @@ pipelines:
           command: jx
           dir: /workspace/source
           name: verify-ingress
+          image: gcr.io/jenkinsxio-labs/jxl
         - args:
           - sync
           command: helmfile

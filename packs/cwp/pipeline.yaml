@@ -29,6 +29,7 @@ pipelines:
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
         - comment: release the helm chart
+          image: gcr.io/jenkinsxio-labs/jxl
           sh: jx step helm release
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)

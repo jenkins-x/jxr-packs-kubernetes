@@ -26,5 +26,6 @@ pipelines:
       steps:
       - sh: jx step changelog --version v\$(cat VERSION)
         name: changelog
+        image: gcr.io/jenkinsxio-labs/jxl
 
 

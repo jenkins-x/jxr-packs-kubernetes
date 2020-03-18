@@ -35,7 +35,7 @@ pipelines:
         when: "!prow"
     setVersion:
       steps:
-      - sh: echo \$(jx-release-version) > VERSION
+      - sh: jx step next-version --use-git-tag-only
         comment: so we can retrieve the version in later steps
       # TODO set the version in source?
       - sh: jx step tag --version \$(cat VERSION)
@@ -52,8 +52,11 @@ pipelines:
       - dir: ./charts/REPLACE_ME_APP_NAME
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
+          name: changelog
+          image: gcr.io/jenkinsxio-labs/jxl
         - comment: release the helm chart
           sh: jx step helm release
+          image: gcr.io/jenkinsxio-labs/jxl
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
           image: gcr.io/jenkinsxio-labs/jxl

@@ -25,7 +25,7 @@ pipelines:
         when: "!prow"
     setVersion:
       steps:
-      - sh: echo \$(jx-release-version) > VERSION
+      - sh: jx step next-version --use-git-tag-only
         comment: so we can retrieve the version in later steps
       # TODO set the version in source?
       - sh: jx step tag --version \$(cat VERSION)
