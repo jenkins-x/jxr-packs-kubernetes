@@ -144,6 +144,14 @@ pipelines:
               name: jx-boot-secrets
         steps:
         - args:
+          - boot
+          - secrets
+          - export
+          - --dir=.
+          command: jxl
+          dir: /workspace/source
+          name: verify-secrets
+        - args:
           - step
           - create
           - helmfile
