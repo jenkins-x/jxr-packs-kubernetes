@@ -111,6 +111,15 @@ pipelines:
           dir: /workspace/source
           name: install-pipelines
         - args:
+          - step
+          - verify
+          - dns
+          - --timeout
+          - 10m
+          command: jx
+          dir: /workspace/source
+          name: verify-dns
+        - args:
           - update
           - webhooks
           - --verbose
