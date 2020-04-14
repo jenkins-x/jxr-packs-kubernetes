@@ -51,17 +51,17 @@ pipelines:
           dir: /workspace/source
           name: verify-preinstall
         - args:
-          - upgrade
-          - crd
-          command: jx
-          name: install-jx-crds
-        - args:
           - step
           - create
           - helmfile
           command: jx
           dir: /workspace/source
           name: generate-helmfile
+        - args:
+          - diff
+          command: helmfile
+          dir: /workspace/source/system
+          name: helmfile-system-diff
         - args:
           - sync
           command: helmfile
@@ -75,6 +75,11 @@ pipelines:
           dir: /workspace/source
           name: verify-ingress
           image: gcr.io/jenkinsxio-labs/jxl
+        - args:
+          - diff
+          command: helmfile
+          dir: /workspace/source/apps
+          name: helmfile-apps-diff
         - args:
           - sync
           command: helmfile
