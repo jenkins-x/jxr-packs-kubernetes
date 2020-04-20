@@ -15,10 +15,10 @@ pipelines:
         steps:
         - sh: make preview
           name: make-preview
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - sh: jx preview --app $APP_NAME --dir ../..
           name: make-preview
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
 
   release:
     build:
@@ -30,10 +30,10 @@ pipelines:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/REPLACE_ME_APP_NAME
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: release the helm chart
           sh: jx step helm release
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl

@@ -55,10 +55,9 @@ pipelines:
           dir: /workspace/source
           name: verify-preinstall
         - args:
-          - step
-          - create
+          - boot
           - helmfile
-          command: jx
+          command: jxl
           dir: /workspace/source
           name: generate-helmfile
         - args:
@@ -80,11 +79,12 @@ pipelines:
           name: verify-ingress
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
-          - -c
-          - kubectl annotate sourcerepositories --all meta.helm.sh/release-name=repositories; kubectl annotate sourcerepositories --all meta.helm.sh/release-namespace=$NAMESPACE; kubectl label sourcerepositories --all app.kubernetes.io/managed-by=Helm;
-          command: "/bin/sh"
+          - step
+          - label
+          - repo
+          command: jxl
           dir: /workspace/source
-          name: helm-annotate-source-repositories
+          name: helm-label-repositories
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
           - diff
