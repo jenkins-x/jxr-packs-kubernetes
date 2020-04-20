@@ -1,0 +1,25 @@
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-credential-initializer-f2jng[0m
+{"level":"warn","ts":1587387889.2816484,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587387889.292354,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-working-dir-initializer-h4bbn[0m
+{"level":"warn","ts":1587387890.4720397,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587387890.4766145,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-git-source-jenkins-x-jxr-packs-kubernetes-62dd8-8g87w[0m
+{"level":"warn","ts":1587387894.5982838,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587387895.7846138,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-packs-kubernetes.git @ v0.0.3 in path /workspace/source"}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:804dcdd161b1ea71328019d88cc529ff10dd2da1
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-62dd8-6[0m stage [32mrelease[0m and container [32mstep-promote-release[0m
+promoting the new version 0.0.3 to downstream repositories
+Using https://github.com/jenkins-x/**r-packs-kubernetes as source for change discovered from git repo in /workspace/source
+WARNING: 
+Created Pull Request: https://github.com/jenkins-x/**r-versions/pull/14
+Added label updatebot to Pull Request https://github.com/jenkins-x/**r-versions/pull/14
