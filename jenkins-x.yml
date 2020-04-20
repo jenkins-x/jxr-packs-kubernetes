@@ -1,1 +1,11 @@
 buildPack: git
+    release:
+      pipeline:
+        agent:
+          image: gcr.io/jenkinsxio/builder-go
+        stages:
+        - name: release
+          steps:
+          - command: ./promote.sh
+            dir: /workspace/source
+            name: promote-release
