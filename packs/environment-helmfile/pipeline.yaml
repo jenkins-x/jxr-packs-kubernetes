@@ -80,9 +80,7 @@ pipelines:
           name: verify-ingress
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
-          - kubectl annotate sourcerepositories --all meta.helm.sh/release-name=repositories;
-            kubectl annotate sourcerepositories --all meta.helm.sh/release-namespace=$NAMESPACE;
-            kubectl label sourcerepositories --all app.kubernetes.io/managed-by=Helm;
+          - kubectl annotate sourcerepositories --all meta.helm.sh/release-name=repositories; kubectl annotate sourcerepositories --all meta.helm.sh/release-namespace=$NAMESPACE; kubectl label sourcerepositories --all app.kubernetes.io/managed-by=Helm;
           command: ["/bin/sh", "-c"]
           dir: /workspace/source
           name: helm-annotate-source-repositories
