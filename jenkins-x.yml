@@ -1,4 +1,6 @@
 buildPack: git
+pipelineConfig:
+  pipelines:
     release:
       pipeline:
         agent:
