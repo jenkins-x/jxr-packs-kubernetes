@@ -23,6 +23,10 @@ pipelines:
               value: "/builder/home"
             - name: JX_SECRETS_YAML
               value: "/secrets/jx-boot/secrets.yaml"
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
             volumeMounts:
             - mountPath: /secrets/jx-boot
               name: jx-boot-secrets
@@ -51,10 +55,9 @@ pipelines:
           dir: /workspace/source
           name: verify-preinstall
         - args:
-          - step
-          - create
+          - boot
           - helmfile
-          command: jx
+          command: jxl
           dir: /workspace/source
           name: generate-helmfile
         - args:
@@ -74,6 +77,14 @@ pipelines:
           command: jx
           dir: /workspace/source
           name: verify-ingress
+          image: gcr.io/jenkinsxio-labs-private/jxl
+        - args:
+          - step
+          - label
+          - repo
+          command: jxl
+          dir: /workspace/source
+          name: helm-label-repositories
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
           - diff

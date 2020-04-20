@@ -11,17 +11,17 @@ pipelines:
       steps:
       - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION
         name: post-build
-        image: gcr.io/jenkinsxio-labs/jxl
+        image: gcr.io/jenkinsxio-labs-private/jxl
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/preview
         steps:
         - sh: make preview
           name: make-preview
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - sh: jx preview --app $APP_NAME --dir ../..
           name: jx-preview
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
 
   release:
     build:
@@ -30,19 +30,19 @@ pipelines:
         name: container-build
       - sh: jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)
         name: post-build
-        image: gcr.io/jenkinsxio-labs/jxl
+        image: gcr.io/jenkinsxio-labs-private/jxl
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/REPLACE_ME_APP_NAME
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
           name: changelog
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: release the helm chart
           name: helm-release
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
           sh: jx step helm release
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
           name: jx-promote
-          image: gcr.io/jenkinsxio-labs/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
