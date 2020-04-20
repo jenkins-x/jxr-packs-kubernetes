@@ -1,0 +1,22 @@
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-krfgd[0m
+{"level":"warn","ts":1587370808.8912566,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587370808.8963118,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-h4ssk[0m
+{"level":"warn","ts":1587370809.896308,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587370809.9101343,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-jenkins-x-jxr-packs-kubernetes-p452f-fb9xr[0m
+{"level":"warn","ts":1587370815.007687,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587370816.2586205,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-packs-kubernetes.git @ v0.0.1 in path /workspace/source"}
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:999a740b5f5a3113da157e5c2a1b7baf91f595a3
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mjenkins-x-jxr-packs-kubernetes-p452f-2[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Cloning the Jenkins X versions repo https://github.com/jenkins-x/**r-versions.git with ref refs/heads/master to /builder/home/.**/jenkins-x-versions
+Generated Git credentials file /workspace/xdg_config/git/credentials
