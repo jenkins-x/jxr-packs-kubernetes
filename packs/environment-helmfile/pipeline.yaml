@@ -79,6 +79,7 @@ pipelines:
           name: verify-ingress
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
+          - boot
           - step
           - label
           - repo
