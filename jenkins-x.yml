@@ -4,10 +4,20 @@ pipelineConfig:
     release:
       pipeline:
         agent:
-          image: gcr.io/jenkinsxio/builder-go
+          image: gcr.io/jenkinsxio-labs-private/jxl
         stages:
         - name: release
           steps:
           - command: ./promote.sh
             dir: /workspace/source
             name: promote-release
+    pullRequest:
+      pipeline:
+        agent:
+          image: gcr.io/jenkinsxio-labs-private/jxl
+        stages:
+        - name: release
+          steps:
+          - command: echo hello
+            dir: /workspace/source
+            name: dummy-step
