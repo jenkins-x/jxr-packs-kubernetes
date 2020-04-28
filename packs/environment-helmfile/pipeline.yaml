@@ -122,8 +122,12 @@ pipelines:
           command: jx
           dir: /workspace/source
           name: install-pipelines
-        - command: helm-annotate
-          image: gcr.io/jenkinsxio-labs-private/helm-annotate
+        - args:
+          - boot
+          - step
+          - annotate
+          - helm
+          command: jxl
           dir: /workspace/source
           name: helm-annotate
         - args:
