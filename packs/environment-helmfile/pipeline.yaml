@@ -17,8 +17,6 @@ pipelines:
             emptyDir: {}
           containerOptions:
             env:
-            - name: HELM_PLUGINS
-              value: "/root/.cache/helm/plugins"
             - name: XDG_CONFIG_HOME
               value: "/builder/home"
             - name: JX_SECRETS_YAML
@@ -169,8 +167,6 @@ pipelines:
             emptyDir: {}
           containerOptions:
             env:
-            - name: HELM_PLUGINS
-              value: "/root/.cache/helm/plugins"
             - name: JX_SECRETS_YAML
               value: "/secrets/jx-boot/secrets.yaml"
             volumeMounts:
