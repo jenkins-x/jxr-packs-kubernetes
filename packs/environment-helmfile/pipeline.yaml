@@ -182,10 +182,9 @@ pipelines:
           dir: /workspace/source
           name: verify-secrets
         - args:
-          - step
-          - create
+          - boot
           - helmfile
-          command: jx
+          command: jxl
           dir: /workspace/source
           name: create-helmfile
         - args:
