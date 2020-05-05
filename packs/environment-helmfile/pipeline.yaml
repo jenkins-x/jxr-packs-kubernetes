@@ -59,7 +59,8 @@ pipelines:
           dir: /workspace/source
           name: generate-helmfile
         - args:
-          - diff
+          - --version
+          #- diff
           command: helmfile
           dir: /workspace/source/system
           name: helmfile-system-diff
@@ -86,7 +87,8 @@ pipelines:
           name: helm-label-repositories
           image: gcr.io/jenkinsxio-labs-private/jxl
         - args:
-          - diff
+          - --version
+          #- diff
           command: helmfile
           dir: /workspace/source/apps
           name: helmfile-apps-diff
