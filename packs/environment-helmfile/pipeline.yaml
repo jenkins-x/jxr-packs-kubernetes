@@ -182,6 +182,13 @@ pipelines:
           dir: /workspace/source
           name: verify-secrets
         - args:
+          - step
+          - git
+          - validate
+          command: jx
+          dir: /workspace/source
+          name: validate-git
+        - args:
           - boot
           - helmfile
           command: jxl
