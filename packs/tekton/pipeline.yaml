@@ -1,3 +1,6 @@
+agent:
+  label: jenkins-go
+  container: go
 pipelines:
   pullRequest:
     build:
