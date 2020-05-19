@@ -1,0 +1,9 @@
+pipelines:
+  pullRequest:
+    build:
+      steps:
+      - sh: echo "hello tekton"
+  release:
+    build:
+      steps:
+      - sh: echo "hello tekton"
