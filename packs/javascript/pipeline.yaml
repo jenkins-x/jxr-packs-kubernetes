@@ -46,7 +46,7 @@ pipelines:
         name: next-version
         image: gcr.io/jenkinsxio-labs-private/jxl
         comment: so we can retrieve the version in later steps
-      - sh: "mkdir -p kubernetes; helm template --output-dir=kubernetes $REPO_NAME charts/$REPO_NAME; git add *; git commit -m 'fix: generated helm template'"
+      - sh: "mkdir -p kubernetes; cd kubernetes; helm template --output-dir=. $REPO_NAME ../charts/$REPO_NAME; git add *; git commit -m 'fix: generated helm template'"
         name: next-version
         image: gcr.io/jenkinsxio-labs-private/jxl
         comment: so we can retrieve the version in later steps
