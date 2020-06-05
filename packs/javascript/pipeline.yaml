@@ -53,6 +53,9 @@ pipelines:
         name: helm-template
         image: gcr.io/jenkinsxio-labs-private/jxl
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
+      - sh: "git add charts/* && git commit -m 'fix: generate kubernetes resources"
+        image: gcr.io/jenkinsxio-labs-private/jxl
+        name: git-commit-helm
       - sh: jx step tag --version \$(cat VERSION)
         image: gcr.io/jenkinsxio-labs-private/jxl
         name: tag-version
