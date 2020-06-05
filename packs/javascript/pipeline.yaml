@@ -42,7 +42,7 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
     setVersion:
       steps:
-      - sh: jx step next-version --filename package.json
+      - sh: jx step next-version --use-git-tag-only --tag
         name: next-version
         image: gcr.io/jenkinsxio-labs-private/jxl
         comment: so we can retrieve the version in later steps
