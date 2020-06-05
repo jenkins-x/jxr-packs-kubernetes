@@ -37,3 +37,19 @@ pipelines:
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
           image: gcr.io/jenkinsxio-labs-private/jxl
+    setVersion:
+      steps:
+      - sh: jx step next-version --use-git-tag-only
+        name: next-version
+        image: gcr.io/jenkinsxio-labs-private/jxl
+        comment: so we can retrieve the version in later steps
+      - sh: jx step tag --version \$(cat VERSION) --no-apply
+        image: gcr.io/jenkinsxio-labs-private/jxl
+        name: update-version
+      - sh: "jxl step helm template"
+        name: helm-template
+        image: gcr.io/jenkinsxio-labs-private/jxl
+        comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
+      - sh: jx step tag --version \$(cat VERSION)
+        image: gcr.io/jenkinsxio-labs-private/jxl
+        name: tag-version
