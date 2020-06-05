@@ -1,4 +1,4 @@
-## Kubernetes Resources
+## Kubernetes Resources
 
 This directory is where released kubernetes resources will be generated in each version (a git tag).
 
