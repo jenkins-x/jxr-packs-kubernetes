@@ -24,9 +24,9 @@ pipelines:
         - args:
           - apply
           - -R
-          - -f
           - -l
           - app.kubernetes.io/managed-by=jenkins-x-pipeline
+          - -f
           - cluster
           - namespaces
           command: kubectl
