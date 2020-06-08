@@ -28,6 +28,7 @@ pipelines:
           - app.kubernetes.io/managed-by=jenkins-x-pipeline
           - -f
           - cluster
+          - -f
           - namespaces
           command: kubectl
           dir: /workspace/source
