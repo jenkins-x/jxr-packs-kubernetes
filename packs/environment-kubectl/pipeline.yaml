@@ -27,9 +27,7 @@ pipelines:
           - --all
           - -R
           - -f
-          - cluster
-          - -f
-          - namespaces
+          - config-root
           command: kubectl
           dir: /workspace/source
           name: kubectl-apply
@@ -42,8 +40,16 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
         steps:
         - args:
-          - cluster/*
-          - namespaces/*
+          - --source-format
+          - unstructured
+          - --path
+          - config-root
+          command: nomos
+          dir: /workspace/source
+          image: gcr.io/jenkinsxio-labs-private/jxl
+          name: nomos-vet
+        - args:
+          - config-root/*
           dir: /workspace/source
           image: garethr/kubeval:latest
           name: kubeval
