@@ -23,9 +23,9 @@ pipelines:
         steps:
         - args:
           - apply
+          - --prune
+          - --all
           - -R
-          - -l
-          - app.kubernetes.io/managed-by=jenkins-x-pipeline
           - -f
           - cluster
           - -f
