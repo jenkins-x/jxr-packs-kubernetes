@@ -50,6 +50,7 @@ pipelines:
           name: nomos-vet
         - args:
           - config-root/*
+          command: kubeval
           dir: /workspace/source
           image: garethr/kubeval:latest
           name: kubeval
