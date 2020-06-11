@@ -40,13 +40,14 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
         steps:
         - args:
+          - vet
           - --source-format
           - unstructured
           - --path
           - config-root
           command: nomos
           dir: /workspace/source
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/config-management-release/nomos:v1.3.2-rc.20
           name: nomos-vet
         - args:
           - config-root/*
