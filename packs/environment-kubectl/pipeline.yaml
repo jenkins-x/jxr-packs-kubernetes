@@ -40,6 +40,12 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
         steps:
         - args:
+          - config-root/*
+          command: kubeval
+          dir: /workspace/source
+          image: garethr/kubeval:latest
+          name: kubeval
+        - args:
           - vet
           - --source-format
           - unstructured
@@ -49,11 +55,5 @@ pipelines:
           dir: /workspace/source
           image: gcr.io/config-management-release/nomos:v1.3.2-rc.20
           name: nomos-vet
-        - args:
-          - config-root/*
-          command: kubeval
-          dir: /workspace/source
-          image: garethr/kubeval:latest
-          name: kubeval
 
 
