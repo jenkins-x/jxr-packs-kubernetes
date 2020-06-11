@@ -40,7 +40,9 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
         steps:
         - args:
-          - config-root/*
+          - --ignore-missing-schemas
+          - -d
+          - config-root
           command: kubeval
           dir: /workspace/source
           image: garethr/kubeval:latest
