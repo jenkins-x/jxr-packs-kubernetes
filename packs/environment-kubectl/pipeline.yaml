@@ -23,14 +23,9 @@ pipelines:
         steps:
         - args:
           - apply
-          - --prune
-          - --all
-          - -R
-          - -f
-          - config-root
-          command: kubectl
+          command: make
           dir: /workspace/source
-          name: kubectl-apply
+          name: apply
 
   pullRequest:
     pipeline:
