@@ -39,7 +39,7 @@ pipelines:
         - comment: promote through all 'Auto' promotion Environments
           sh: jx-alpha-promote -b --all-auto --timeout 1h
           name: jx-promote
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio-labs-private/jx-promote
     setVersion:
       steps:
       - sh: jx step next-version --filename package.json
@@ -54,5 +54,5 @@ pipelines:
         image: gcr.io/jenkinsxio-labs-private/jxl
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
       - sh: jx step tag --version \$(cat VERSION)
-        image: gcr.io/jenkinsxio-labs-private/jx-promote
+        image: gcr.io/jenkinsxio-labs-private/jxl
         name: tag-version
