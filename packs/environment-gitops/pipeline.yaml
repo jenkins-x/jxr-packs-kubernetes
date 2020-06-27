@@ -1,0 +1,56 @@
+extends:
+  import: classic
+  file: pipeline.yaml
+agent:
+  label: jenkins-go
+  container: gcr.io/jenkinsxio-labs-private/jx-gitops
+pipelines:
+  release:
+    pipeline:
+      stages:
+      - name: release
+        agent:
+          image: gcr.io/jenkinsxio-labs-private/jx-gitops
+        options:
+          containerOptions:
+            env:
+            - name: XDG_CONFIG_HOME
+              value: "/builder/home"
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+        steps:
+        - args:
+          - apply
+          command: make
+          dir: /workspace/source
+          name: apply
+
+  pullRequest:
+    pipeline:
+      stages:
+      - name: pr-checks
+        agent:
+          image: gcr.io/jenkinsxio-labs-private/jx-gitops
+        steps:
+        - args:
+          - --ignore-missing-schemas
+          - -d
+          - config-root
+          command: kubeval
+          dir: /workspace/source
+          image: garethr/kubeval:latest
+          name: kubeval
+        - args:
+          - vet
+          - --source-format
+          - unstructured
+          - --path
+          - config-root
+          command: nomos
+          dir: /workspace/source
+          image: gcr.io/config-management-release/nomos:v1.3.2-rc.20
+          name: nomos-vet
+
+
