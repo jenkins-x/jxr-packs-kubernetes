@@ -3,14 +3,14 @@ extends:
   file: pipeline.yaml
 agent:
   label: jenkins-go
-  container: gcr.io/jenkinsxio-labs-private/jxl
+  container: gcr.io/jenkinsxio-labs-private/jx-gitops
 pipelines:
   release:
     pipeline:
       stages:
       - name: release
         agent:
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio-labs-private/jx-gitops
         options:
           containerOptions:
             env:
@@ -32,7 +32,7 @@ pipelines:
       stages:
       - name: pr-checks
         agent:
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio-labs-private/jx-gitops
         steps:
         - args:
           - --ignore-missing-schemas
