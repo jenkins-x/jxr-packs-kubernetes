@@ -49,7 +49,7 @@ pipelines:
       - sh: jx step tag --version \$(cat VERSION) --no-apply
         image: gcr.io/jenkinsxio-labs-private/jxl
         name: update-version
-      - sh: "jx-gitops helm template"
+      - sh: "jx-gitops helm template --optional"
         name: helm-template
         image: gcr.io/jenkinsxio-labs-private/jx-gitops
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
