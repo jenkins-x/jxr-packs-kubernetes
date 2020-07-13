@@ -62,8 +62,8 @@ pipelines:
           sh: jx step helm release
           image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: promote through all 'Auto' promotion Environments
-          sh: jx-alpha-promote -b --all-auto --timeout 1h
-          image: gcr.io/jenkinsxio-labs-private/jx-promote
+          sh: jx promote -b --all-auto --timeout 1h
+          image: gcr.io/jenkinsxio-labs-private/jx-cli
   post:
     steps:
     - groovy: always
