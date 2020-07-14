@@ -22,10 +22,10 @@ pipelines:
                   fieldPath: metadata.namespace
         steps:
         - args:
-          - apply
+          - release
           command: make
           dir: /workspace/source
-          name: apply
+          name: release
 
   pullRequest:
     pipeline:
@@ -35,6 +35,11 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jx-cli
         steps:
         - args:
+          - pr
+          command: make
+          dir: /workspace/source
+          name: pr
+        - args:
           - --ignore-missing-schemas
           - -d
           - config-root
@@ -42,15 +47,15 @@ pipelines:
           dir: /workspace/source
           image: garethr/kubeval:latest
           name: kubeval
-        - args:
-          - vet
-          - --source-format
-          - unstructured
-          - --path
-          - config-root
-          command: nomos
-          dir: /workspace/source
-          image: gcr.io/config-management-release/nomos:v1.3.2-rc.20
-          name: nomos-vet
+        # - args:
+        #   - vet
+        #   - --source-format
+        #   - unstructured
+        #   - --path
+        #   - config-root
+        #   command: nomos
+        #   dir: /workspace/source
+        #   image: gcr.io/config-management-release/nomos:v1.3.2-rc.20
+        #   name: nomos-vet
 
 
