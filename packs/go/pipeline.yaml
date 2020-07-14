@@ -8,6 +8,9 @@ pipelines:
       - sh: /kaniko/executor --cache=true --cache-dir=/workspace --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION --cache-repo=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/cache
         name: container-build
         image: gcr.io/kaniko-project/executor
+        env:
+        - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+          value: "true"
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/preview
@@ -25,6 +28,9 @@ pipelines:
       - sh: /kaniko/executor --cache=true --cache-dir=/workspace --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION --cache-repo=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/cache
         name: container-build
         image: gcr.io/kaniko-project/executor
+        env:
+        - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+          value: "true"
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/REPLACE_ME_APP_NAME
