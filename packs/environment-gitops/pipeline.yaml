@@ -53,14 +53,14 @@ pipelines:
           env:
           - name: XDG_CONFIG_HOME
             value: /workspace/xdg_config
-        - args:
-          - --ignore-missing-schemas
-          - -d
-          - config-root
-          command: kubeval
-          dir: /workspace/source
-          image: garethr/kubeval:latest
-          name: kubeval
+#        - args:
+#          - --ignore-missing-schemas
+#          - -d
+#          - config-root
+#          command: kubeval
+#          dir: /workspace/source
+#          image: garethr/kubeval:latest
+#          name: kubeval
         # - args:
         #   - vet
         #   - --source-format
