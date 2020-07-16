@@ -47,6 +47,9 @@ pipelines:
           command: make
           dir: /workspace/source
           name: pr
+          env:
+          - name: XDG_CONFIG_HOME
+          - value: /builder/home
         - args:
           - --ignore-missing-schemas
           - -d
