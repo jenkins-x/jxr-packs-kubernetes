@@ -35,6 +35,14 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jx-cli
         steps:
         - args:
+          - step
+          - git
+          - credentials
+          command: jx
+          dir: /workspace/source
+          name: git-credentials
+          image: gcr.io/jenkinsxio/builder-go
+        - args:
           - pr
           command: make
           dir: /workspace/source
