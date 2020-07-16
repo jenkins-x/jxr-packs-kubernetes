@@ -42,6 +42,9 @@ pipelines:
           dir: /workspace/source
           name: git-credentials
           image: gcr.io/jenkinsxio/builder-go
+          env:
+          - name: XDG_CONFIG_HOME
+            value: /workspace/xdg_config
         - args:
           - pr
           command: make
@@ -49,7 +52,7 @@ pipelines:
           name: pr
           env:
           - name: XDG_CONFIG_HOME
-            value: /builder/home
+            value: /workspace/xdg_config
         - args:
           - --ignore-missing-schemas
           - -d
