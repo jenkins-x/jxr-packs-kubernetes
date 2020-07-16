@@ -49,7 +49,7 @@ pipelines:
           name: pr
           env:
           - name: XDG_CONFIG_HOME
-          - value: /builder/home
+            value: /builder/home
         - args:
           - --ignore-missing-schemas
           - -d
