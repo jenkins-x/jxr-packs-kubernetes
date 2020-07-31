@@ -22,7 +22,7 @@ pipelines:
         steps:
         - sh: make preview
           name: make-preview
-          image: gcr.io/jenkinsxio-labs-private/jx-cli
+          image: gcr.io/jenkinsxio/builder-go
         - sh: jx preview --app $APP_NAME --dir ../..
           name: jx-preview
           image: gcr.io/jenkinsxio-labs-private/jx-cli
