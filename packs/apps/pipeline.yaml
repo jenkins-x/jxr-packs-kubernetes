@@ -48,4 +48,4 @@ pipelines:
           - comment: Let's promote through all 'Auto' promotion Environments
             sh: jx promote -b --all-auto --timeout 1h
             name: jx-promote
-            image: gcr.io/jenkinsxio-labs-private/jx-cli
+            image: gcr.io/jenkinsxio/jx-cli

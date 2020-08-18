@@ -25,7 +25,7 @@ pipelines:
           image: gcr.io/jenkinsxio/builder-go
         - sh: jx preview --app $APP_NAME --dir ../..
           name: jx-preview
-          image: gcr.io/jenkinsxio-labs-private/jx-cli
+          image: gcr.io/jenkinsxio/jx-cli
   release:
     setup:
       steps:
@@ -70,7 +70,7 @@ pipelines:
           image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h
-          image: gcr.io/jenkinsxio-labs-private/jx-cli
+          image: gcr.io/jenkinsxio/jx-cli
   post:
     steps:
     - groovy: always

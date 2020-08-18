@@ -3,14 +3,14 @@ extends:
   file: pipeline.yaml
 agent:
   label: jenkins-go
-  container: gcr.io/jenkinsxio-labs-private/jx-cli
+  container: gcr.io/jenkinsxio/jx-cli
 pipelines:
   release:
     pipeline:
       stages:
       - name: release
         agent:
-          image: gcr.io/jenkinsxio-labs-private/jx-cli
+          image: gcr.io/jenkinsxio/jx-cli
         options:
           containerOptions:
             env:
@@ -39,7 +39,7 @@ pipelines:
       stages:
       - name: pr-checks
         agent:
-          image: gcr.io/jenkinsxio-labs-private/jx-cli
+          image: gcr.io/jenkinsxio/jx-cli
         steps:
         - args:
           - step
