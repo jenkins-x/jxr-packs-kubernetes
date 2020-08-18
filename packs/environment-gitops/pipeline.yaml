@@ -26,6 +26,13 @@ pipelines:
           command: make
           dir: /workspace/source
           name: release
+        - args:
+          - admin
+          - log
+          - --sha-mode
+          command: jx
+          dir: /workspace/source
+          name: log-apply
 
   pullRequest:
     pipeline:
