@@ -14,6 +14,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
         - dir: charts/REPLACE_ME_APP_NAME
           steps:
             - sh: jx step helm build
@@ -32,6 +34,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
         - dir: charts/REPLACE_ME_APP_NAME
           steps:
             - sh: jx step helm build --verbose

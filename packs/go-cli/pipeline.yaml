@@ -13,6 +13,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
   release:
     build:
       replace: true
@@ -26,6 +28,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
     setVersion:
       steps:
       - sh: jx step next-version --use-git-tag-only

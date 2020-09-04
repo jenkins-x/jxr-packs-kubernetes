@@ -11,6 +11,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/preview
@@ -31,6 +33,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
     promote:
       steps:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/REPLACE_ME_APP_NAME
