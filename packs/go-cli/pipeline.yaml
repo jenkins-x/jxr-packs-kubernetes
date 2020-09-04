@@ -34,16 +34,16 @@ pipelines:
       steps:
       - sh: jx step next-version --use-git-tag-only
         name: next-version
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         comment: so we can retrieve the version in later steps
       - sh: jx step tag --version \$(cat VERSION) --no-apply
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         name: update-version
       - sh: "echo disabled: jx gitops helm template --optional"
         name: helm-template
         image: gcr.io/jenkinsxio/jx-cli
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
       - sh: jx step tag --version \$(cat VERSION)
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         name: tag-version
 

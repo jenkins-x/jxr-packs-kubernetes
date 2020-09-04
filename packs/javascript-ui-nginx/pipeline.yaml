@@ -45,10 +45,10 @@ pipelines:
         steps:
         - sh: jx step changelog --batch-mode --version v\$(cat ../../VERSION)
           name: changelog
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio/builder-go
         - comment: release the helm chart
           sh: jx step helm release
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio/builder-go
           name: helm-release
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h
