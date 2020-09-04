@@ -13,6 +13,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
     promote:
       steps:
       - dir: ./charts/preview
@@ -35,6 +37,8 @@ pipelines:
         env:
         - name: NO_GOOGLE_APPLICATION_CREDENTIALS
           value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: ""
     promote:
       steps:
       - dir: ./charts/REPLACE_ME_APP_NAME
