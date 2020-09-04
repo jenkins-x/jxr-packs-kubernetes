@@ -40,10 +40,10 @@ pipelines:
       - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/REPLACE_ME_APP_NAME
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio/builder-go
         - comment: release the helm chart
           sh: jx step helm release
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: gcr.io/jenkinsxio/builder-go
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h
           image: gcr.io/jenkinsxio/jx-cli
@@ -51,15 +51,15 @@ pipelines:
       steps:
       - sh: jx step next-version --use-git-tag-only
         name: next-version
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         comment: so we can retrieve the version in later steps
       - sh: jx step tag --version \$(cat VERSION) --no-apply
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         name: update-version
       - sh: "echo disabled: jx gitops helm template --optional"
         name: helm-template
         image: gcr.io/jenkinsxio/jx-cli
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
       - sh: jx step tag --version \$(cat VERSION)
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: gcr.io/jenkinsxio/builder-go
         name: tag-version
