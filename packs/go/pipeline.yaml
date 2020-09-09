@@ -15,11 +15,8 @@ pipelines:
           value: ""
     promote:
       steps:
-      - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME/charts/preview
+      - dir: /home/jenkins/go/src/REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME
         steps:
-        - sh: make preview
-          name: make-preview
-          image: gcr.io/jenkinsxio/builder-go
         - sh: jx preview create --app $APP_NAME --dir ../..
           name: jx-preview
           image: gcr.io/jenkinsxio/jx-cli
