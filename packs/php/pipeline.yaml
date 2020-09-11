@@ -18,14 +18,9 @@ pipelines:
           value: ""
     promote:
       steps:
-      - dir: ./charts/preview
-        steps:
-        - sh: make preview
-          name: make-preview
-          image: gcr.io/jenkinsxio/builder-go
-        - sh: jx preview create --app $APP_NAME --dir ../..
-          name: jx-preview
-          image: gcr.io/jenkinsxio/jx-cli
+      - sh: jx preview create --app $APP_NAME
+        name: jx-preview
+        image: gcr.io/jenkinsxio/jx-cli
 
   release:
     setVersion:
