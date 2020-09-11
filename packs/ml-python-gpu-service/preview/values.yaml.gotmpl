@@ -6,3 +6,9 @@ jxRequirements:
   ingress:
     # lets use a sub domain for the preview
     namespaceSubDomain: "-{{ requiredEnv "PREVIEW_NAMESPACE" }}."
+    domain: "{{ .Values.jxRequirements.ingress.domain }}"
+
+# optional list of image pull secrets to use to pull images
+jx:
+  imagePullSecrets:
+    - knative-docker-user-pass
