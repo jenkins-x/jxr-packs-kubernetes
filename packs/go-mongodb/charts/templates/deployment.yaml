@@ -60,7 +60,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- end }}
       imagePullSecrets:
-{{- range $pval := .Values.imagePullSecrets }}
+{{- range $pval := .Values.jx.imagePullSecrets }}
       - name: {{ quote $pval }}
 {{- end }}
 
