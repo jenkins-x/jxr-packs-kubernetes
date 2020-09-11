@@ -59,3 +59,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- end }}
+      imagePullSecrets:
+{{- range $pval := .Values.imagePullSecrets }}
+      - name: {{ quote $pval }}
+{{- end }}
+
