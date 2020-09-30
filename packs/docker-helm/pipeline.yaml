@@ -11,15 +11,15 @@ pipelines:
         - sh: /kaniko/executor $KANIKO_FLAGS --cache=true --cache-dir=/workspace --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION --cache-repo=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/cache
           name: container-build
           image: gcr.io/kaniko-project/executor
-        env:
-        - name: NO_GOOGLE_APPLICATION_CREDENTIALS
-          value: "true"
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: ""
-        - dir: charts/REPLACE_ME_APP_NAME
-          steps:
-            - sh: jx step helm build
-              name: helm-build
+          env:
+          - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+            value: "true"
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: ""
+          - dir: charts/REPLACE_ME_APP_NAME
+            steps:
+              - sh: jx step helm build
+                name: helm-build
 
   release:
     setVersion:
@@ -31,16 +31,16 @@ pipelines:
         - sh: /kaniko/executor $KANIKO_FLAGS --cache=true --cache-dir=/workspace --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION --cache-repo=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/cache
           name: container-build
           image: gcr.io/kaniko-project/executor
-        env:
-        - name: NO_GOOGLE_APPLICATION_CREDENTIALS
-          value: "true"
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: ""
-        - dir: charts/REPLACE_ME_APP_NAME
-          steps:
-            - sh: jx step helm build --verbose
-              name: helm-build
-              comment: Let's build chart
+          env:
+          - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+            value: "true"
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: ""
+          - dir: charts/REPLACE_ME_APP_NAME
+            steps:
+              - sh: jx step helm build --verbose
+                name: helm-build
+                comment: Let's build chart
     promote:
       steps:
       - dir: charts/REPLACE_ME_APP_NAME
