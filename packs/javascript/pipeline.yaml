@@ -46,6 +46,7 @@ pipelines:
           name: jx-promote
           image: gcr.io/jenkinsxio/jx-cli
     setVersion:
+      replace: true
       steps:
       - sh: jx step next-version --filename package.json
         name: next-version
