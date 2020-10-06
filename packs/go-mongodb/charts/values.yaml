@@ -80,6 +80,8 @@ REPLACE_ME_APP_NAME-db:
 ingress:
   annotations:
 #      kubernetes.io/ingress.class: nginx
+  tls:
+    secretName: ""
 
 # values we use from the `jx-requirements.yml` file if we are using helmfile and helm 3
 jxRequirements:
